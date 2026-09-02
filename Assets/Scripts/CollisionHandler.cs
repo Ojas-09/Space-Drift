@@ -17,9 +17,15 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("yayyy reached the location");
                 break;
             default:
-                SceneManager.LoadScene(0);
+                Reloadscene();
                 break;
 
         }
+    }
+
+    private static void Reloadscene()
+    {
+        int currentscene = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentscene);
     }
 }
