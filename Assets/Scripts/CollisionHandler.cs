@@ -14,7 +14,7 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("yum yum yumm");
                 break;
             case "Finish":
-                Debug.Log("yayyy reached the location");
+                Nextlevel();
                 break;
             default:
                 Reloadscene();
@@ -27,5 +27,15 @@ public class CollisionHandler : MonoBehaviour
     {
         int currentscene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentscene);
+    }
+    private static void Nextlevel()
+    {
+        int currentscene = SceneManager.GetActiveScene().buildIndex;
+        int nextscene = currentscene +1;
+        if (nextscene == SceneManager.sceneCountInBuildSettings)
+        {
+            nextscene = 0;
+        }
+        SceneManager.LoadScene(nextscene);
     }
 }
