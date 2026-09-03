@@ -101,6 +101,7 @@ MonoBehaviour:
       m_Flags: 8
     m_Flags: 0
   rotating_power: 30
+  mainengine: {fileID: 8300000, guid: 5328165af38ae5f4197555884bafc439, type: 3}
 --- !u!54 &2745928981545956337
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -258,6 +259,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29cc9d7a29a5d1748bbf5b6f53225a18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CollisionHandler
+  delay: 2
+  collide: {fileID: 8300000, guid: e3b7844660459304eab3a1ffdfd5ef2a, type: 3}
+  win: {fileID: 8300000, guid: 255337cc616724e439c9d2377240bf5c, type: 3}
 --- !u!1001 &7229281349083309944
 PrefabInstance:
   m_ObjectHideFlags: 0

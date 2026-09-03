@@ -1,8 +1,18 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
+    [SerializeField] float delay = 2f;
+    [SerializeField] AudioClip collide;
+    [SerializeField] AudioClip win;
+    AudioSource AudioSource;
+
+    void Start()
+    {
+        AudioSource = GetComponent<AudioSource>();
+    }
     void OnCollisionEnter(Collision other)
     {
         switch(other.gameObject.tag)
@@ -14,21 +24,36 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("yum yum yumm");
                 break;
             case "Finish":
-                Nextlevel();
+                nextlevelsequence();
                 break;
             default:
-                Reloadscene();
+                Destructionsequence();
                 break;
 
         }
     }
 
-    private static void Reloadscene()
+    private void Destructionsequence()
+    {
+        GetComponent<Movement>().enabled = false;
+        Invoke("Reloadscene", delay);
+        AudioSource.PlayOneShot(collide);
+
+    }
+    private void nextlevelsequence()
+    {
+        GetComponent<Movement>().enabled = false;
+        Invoke("Nextlevel", delay);
+        AudioSource.PlayOneShot(win);
+
+    }
+
+    private void Reloadscene()
     {
         int currentscene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentscene);
     }
-    private static void Nextlevel()
+    private void Nextlevel()
     {
         int currentscene = SceneManager.GetActiveScene().buildIndex;
         int nextscene = currentscene +1;
