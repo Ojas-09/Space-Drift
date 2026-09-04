@@ -9,6 +9,7 @@ public class Movement : MonoBehaviour
     [SerializeField] InputAction rotater;
     [SerializeField]float rotating_power = 10f;
     [SerializeField] AudioClip mainengine;
+    
 
     Rigidbody rb;
 

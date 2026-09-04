@@ -7,7 +7,11 @@ public class CollisionHandler : MonoBehaviour
     [SerializeField] float delay = 2f;
     [SerializeField] AudioClip collide;
     [SerializeField] AudioClip win;
+    [SerializeField] ParticleSystem crash;
+    [SerializeField] ParticleSystem success;
     AudioSource AudioSource;
+
+    bool iscontrollable = true;
 
     void Start()
     {
@@ -15,13 +19,11 @@ public class CollisionHandler : MonoBehaviour
     }
     void OnCollisionEnter(Collision other)
     {
+        if (!iscontrollable){return;}
         switch(other.gameObject.tag)
         {
             case "friendly":
                 Debug.Log("this is okay");
-                break;
-            case "fuel":
-                Debug.Log("yum yum yumm");
                 break;
             case "Finish":
                 nextlevelsequence();
@@ -35,6 +37,9 @@ public class CollisionHandler : MonoBehaviour
 
     private void Destructionsequence()
     {
+        iscontrollable = false;
+        AudioSource.Stop();
+        crash.Play();
         GetComponent<Movement>().enabled = false;
         Invoke("Reloadscene", delay);
         AudioSource.PlayOneShot(collide);
@@ -42,6 +47,9 @@ public class CollisionHandler : MonoBehaviour
     }
     private void nextlevelsequence()
     {
+        iscontrollable = false;
+        AudioSource.Stop();
+        success.Play();
         GetComponent<Movement>().enabled = false;
         Invoke("Nextlevel", delay);
         AudioSource.PlayOneShot(win);
