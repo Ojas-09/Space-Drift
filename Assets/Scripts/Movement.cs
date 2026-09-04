@@ -9,6 +9,9 @@ public class Movement : MonoBehaviour
     [SerializeField] InputAction rotater;
     [SerializeField]float rotating_power = 10f;
     [SerializeField] AudioClip mainengine;
+    [SerializeField] ParticleSystem main_booster;
+    [SerializeField] ParticleSystem left_booster;
+    [SerializeField] ParticleSystem right_booster;
     
 
     Rigidbody rb;
@@ -43,10 +46,15 @@ public class Movement : MonoBehaviour
             {
                 AudiSrc.PlayOneShot(mainengine);
             }
+            if (!main_booster.isPlaying)
+            {
+                main_booster.Play();
+            }
         }
         else
         {
             AudiSrc.Stop();
+            main_booster.Stop();
         }
     }
     void rotating()
@@ -55,10 +63,23 @@ public class Movement : MonoBehaviour
         if (rotationinput < 0)
         {
             angled(rotating_power);
+            if (!right_booster.isPlaying)
+            {
+                right_booster.Play();
+            }
         }
         else if (rotationinput > 0)
         {
             angled(-rotating_power);
+            if (!left_booster.isPlaying)
+            {
+                left_booster.Play();
+            }
+        }
+        else
+        {
+            left_booster.Stop();
+            right_booster.Stop();
         }
     }
 
