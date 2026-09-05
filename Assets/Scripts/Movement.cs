@@ -40,47 +40,69 @@ public class Movement : MonoBehaviour
     {
         if (thrust.IsPressed())
         {
-            
-            rb.AddRelativeForce(Vector3.up * thruststrength * Time.fixedDeltaTime);
-            if (!AudiSrc.isPlaying)
-            {
-                AudiSrc.PlayOneShot(mainengine);
-            }
-            if (!main_booster.isPlaying)
-            {
-                main_booster.Play();
-            }
+            startThrusting();
         }
         else
         {
-            AudiSrc.Stop();
-            main_booster.Stop();
+            stopthrusting();
         }
+    }
+    private void startThrusting()
+    {
+        rb.AddRelativeForce(Vector3.up * thruststrength * Time.fixedDeltaTime);
+        if (!AudiSrc.isPlaying)
+        {
+            AudiSrc.PlayOneShot(mainengine);
+        }
+        if (!main_booster.isPlaying)
+        {
+            main_booster.Play();
+        }
+    }
+
+    private void stopthrusting()
+    {
+        AudiSrc.Stop();
+        main_booster.Stop();
     }
     void rotating()
     {
         float rotationinput = rotater.ReadValue<float>();
         if (rotationinput < 0)
         {
-            angled(rotating_power);
-            if (!right_booster.isPlaying)
-            {
-                right_booster.Play();
-            }
+            rightrotate();
         }
         else if (rotationinput > 0)
         {
-            angled(-rotating_power);
-            if (!left_booster.isPlaying)
-            {
-                left_booster.Play();
-            }
+            leftrotate();
         }
         else
         {
-            left_booster.Stop();
-            right_booster.Stop();
+            stoprotation();
         }
+    }
+    private void rightrotate()
+    {
+        angled(rotating_power);
+        if (!right_booster.isPlaying)
+        {
+            right_booster.Play();
+        }
+    }
+
+    private void leftrotate()
+    {
+        angled(-rotating_power);
+        if (!left_booster.isPlaying)
+        {
+            left_booster.Play();
+        }
+    }
+
+    private void stoprotation()
+    {
+        left_booster.Stop();
+        right_booster.Stop();
     }
 
     private void angled(float power)
