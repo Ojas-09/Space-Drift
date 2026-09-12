@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/menu.unity
     guid: b1933029ece78804ba9944d77feefebb
   - enabled: 1
+    path: Assets/Scenes/tutorial basics.unity
+    guid: c5087d88ee439f2479561c269b0d54b5
+  - enabled: 1
     path: Assets/Scenes/mario.unity
     guid: 99c9720ab356a0642a771bea13969a05
   - enabled: 1
