@@ -6,9 +6,8 @@ public class exit : MonoBehaviour
 
     void Update()
     {
-        if(Keyboard.current.escapeKey.IsPressed()) {
+        if(Keyboard.current.escapeKey.wasPressedThisFrame){
             Application.Quit();
-            Debug.Log("bhaag");
         }
     }
 }
